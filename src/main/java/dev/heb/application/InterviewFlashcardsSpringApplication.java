@@ -20,7 +20,8 @@ public class InterviewFlashcardsSpringApplication {
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(InterviewFlashcardsSpringApplication.class, args);
-        List<Map<String, List<QA>>> listaTopicos = new ArrayList<>();
+
+        Map<String, List<QA>> mapTopicos = new LinkedHashMap<>();
 
         List<String> lines = Files.readAllLines(Paths.get("src", "main", "resources", "perguntas.txt"));
 
@@ -35,16 +36,9 @@ public class InterviewFlashcardsSpringApplication {
 
             // novo tópico ("# Topico")
             if (line.startsWith("#")) {
-
-                // se já tinha um tópico aberto, salva ele antes de iniciar outro
-                if (currentTopic != null) {
-                    Map<String, List<QA>> obj = new LinkedHashMap<>();
-                    obj.put(currentTopic, currentList);
-                    listaTopicos.add(obj);
-                }
-
                 currentTopic = line.substring(1).trim();
                 currentList = new ArrayList<>();
+                mapTopicos.put(currentTopic, currentList);
             }
 
             // pergunta ("? Pergunta...")
@@ -55,21 +49,16 @@ public class InterviewFlashcardsSpringApplication {
             // resposta ("> Resposta...")
             else if (line.startsWith(">")) {
                 String resposta = line.substring(1).trim();
-                currentList.add(new QA(currentQuestion, resposta));
+                if (currentTopic != null && currentList != null && currentQuestion != null) {
+                    currentList.add(new QA(currentQuestion, resposta));
+                }
                 currentQuestion = null;
             }
         }
 
-        // adicionar último tópico ao JSON
-        if (currentTopic != null) {
-            Map<String, List<QA>> obj = new LinkedHashMap<>();
-            obj.put(currentTopic, currentList);
-            listaTopicos.add(obj);
-        }
-
         // Jackson: gerar JSON bonito (pretty print)
         ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-        String json = mapper.writeValueAsString(listaTopicos);
+        String json = mapper.writeValueAsString(mapTopicos);
 
         Files.write(Paths.get("src", "main", "resources", "resultado.json"), json.getBytes());
 
