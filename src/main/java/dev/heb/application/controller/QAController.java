@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class QAController {
     @GetMapping("/api/qa")
     public Object getQA() throws IOException {
