@@ -1,4 +1,4 @@
-package dev.heb.application;
+package dev.heb.application.models;
 
 public class QA {
     public String pergunta;
