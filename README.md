@@ -4,6 +4,8 @@ Uma aplicação de flashcards para treino de entrevistas, com perguntas na frent
 
 ![Hero](docs/images/Hero.png)
 
+---
+
 ### ✨ Funcionalidades
 
 - **Listagem de categorias de estudo** (ex.: temas de entrevistas)
@@ -13,10 +15,10 @@ Uma aplicação de flashcards para treino de entrevistas, com perguntas na frent
 
 ---
 
-### ✨ Funcionamento
+### ⚙️ Funcionamento
 
 O projeto tem como objetivo ser simples, direto e fácil de manter.
-
+****
 Para adicionar novas perguntas e respostas, basta editar o arquivo de texto localizado em:
 
 ```
