@@ -18,7 +18,7 @@ Uma aplicação de flashcards para treino de entrevistas, com perguntas na frent
 ### ⚙️ Funcionamento
 
 O projeto tem como objetivo ser simples, direto e fácil de manter.
-****
+
 Para adicionar novas perguntas e respostas, basta editar o arquivo de texto localizado em:
 
 ```
@@ -27,9 +27,9 @@ backend/src/main/resources/perguntas.txt
 
 A estrutura é:
 
-\# -> Topico
-? -> Pergunta
-\> -> Resposta
+- \# -> Topico
+- ? -> Pergunta
+- \> -> Resposta
 
 Exemplo:
 
@@ -98,7 +98,7 @@ Para parar:
 docker compose down
 ```
 
-### 🧑‍💻 Rodando sem Docker (desenvolvimento local)
+### 💻 Rodando sem Docker
 
 #### Backend
 
@@ -140,14 +140,6 @@ pnpm dev
 ```
 
 Por padrão, o Vite roda em `http://localhost:5173`.
-
----
-
-Certifique-se de que o arquivo `frontend/.env` aponte para o backend:
-
-```env
-VITE_API_URL=http://localhost:8080
-```
 
 ---
 
