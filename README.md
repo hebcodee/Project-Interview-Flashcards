@@ -1,6 +1,6 @@
 ## Interview Flashcards
 
-## Aplicação fullstack para estudar e treinar para entrevistas técnicas usando flashcards organizados por tópicos.
+Uma aplicação de flashcards para treino de entrevistas, com perguntas na frente e respostas no verso. Simples, personalizável e escalável, ideal para memorizar conteúdos e praticar respostas.
 
 ![Hero](docs/images/Hero.png)
 
