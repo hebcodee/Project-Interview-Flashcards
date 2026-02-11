@@ -106,7 +106,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-5xl md:text-7xl font-display font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40"
           >
-            Flashcards
+            Interview Flashcards
           </motion.h1>
 
           <motion.p
@@ -115,9 +115,9 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed"
           >
-            Select a topic below to start your learning journey.
+            Select a topic below to sharpen your interview skills.
             <br className="hidden md:block" />
-            Minimalist design for maximum focus.
+            Your path to confident interviewing starts here.
           </motion.p>
 
           {/* Search Bar com funcionalidade real */}
