@@ -1,12 +1,11 @@
 package dev.heb.application.controller;
 
 import dev.heb.application.service.QAService;
+import dto.QADto;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -26,5 +25,11 @@ public class QAController {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(json);
+    }
+
+    @PostMapping("/api/qa")
+    public ResponseEntity<Void> setQA(@RequestBody QADto req) throws IOException {
+        service.addNewQA(req);
+        return ResponseEntity.ok().build();
     }
 }

@@ -3,9 +3,11 @@ package dev.heb.application.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import dev.heb.application.models.QA;
+import dto.QADto;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -56,6 +58,49 @@ public class QAService {
         Files.write(Paths.get("src", "main", "resources", "resultado.json"), json.getBytes());
 
         System.out.println("JSON gerado com sucesso!");
+    }
+
+    public void addNewQA(QADto req) throws IOException {
+        Path path = Paths.get("src", "main", "resources", "perguntas.txt");
+        List<String> linhas = new ArrayList<>(Files.readAllLines(path));
+
+        String marcadorTopico = "#" + req.topico();
+        int indexTopico = -1;
+
+        // 1. Procurar o tópico
+        for (int i = 0; i < linhas.size(); i++) {
+            if (linhas.get(i).trim().equalsIgnoreCase(marcadorTopico)) {
+                indexTopico = i;
+                break;
+            }
+        }
+
+        if (indexTopico == -1) {
+            // 2. Se o tópico não existe, criar no final
+            linhas.add("");
+            linhas.add(marcadorTopico);
+            indexTopico = linhas.size() - 1;
+        }
+
+        // 3. Encontrar fim do tópico (antes do próximo "#OutroTopico")
+        int insertIndex = linhas.size();
+        for (int i = indexTopico + 1; i < linhas.size(); i++) {
+            if (linhas.get(i).startsWith("#")) {
+                insertIndex = i;
+                break;
+            }
+        }
+
+        // 4. Inserir pergunta e resposta
+        List<String> bloco = List.of(
+                "?" + req.pergunta(),
+                req.resposta().isEmpty() ? ">" : ">" + req.resposta()
+        );
+
+        linhas.addAll(insertIndex, bloco);
+
+        // 5. Reescrever o arquivo
+        Files.write(path, linhas);
     }
 }
 
